@@ -1,0 +1,42 @@
+baseURL: "https://yuansen23.github.io/"
+title: "My Blog"
+theme: "PaperMod"
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+
+params:
+  # This makes the "Hi, I'm..." section appear
+  homeInfoParams:
+    Title: "Hi, this is yuansen23"
+    Content: >
+      I'm documenting my learning notes in this blog.
+      Welcome to my little corner of the internet.
+  
+  # Social icons below the intro
+  socialIcons:
+    - name: twitter
+      url: "https://twitter.com/yourhandle"
+    - name: github
+      url: "https://github.com/yourhandle"
+
+  # Top Navigation Menu
+  defaultTheme: auto # or light/dark
+  ShowShareButtons: true
+  ShowReadingTime: true
+  
+menu:
+  main:
+    - identifier: archives
+      name: Archive
+      url: /archives/
+      weight: 10
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 20
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 30
