@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Introduction to Contrastive Loss | My Blog</title>
-<meta name="keywords" content="">
+<title>Introduction to Contrastive Loss | Sen Yuan (袁森) - Learning to Unlearn</title>
+<meta name="keywords" content="contrastive learning, ML">
 <meta name="description" content="Contrastive Loss is a widely used objective in metric learning and contrastive learning.
 Its goal is to learn an embedding space where similar samples are close together, while dissimilar samples are far apart.
 The loss operates on pairs of samples:
@@ -83,7 +83,7 @@ This encourages the model to learn representations that are discriminative and g
     }
 
 </script><meta property="og:url" content="https://www.yuansen.xyz/posts/introduction-to-contrastive-loss/">
-  <meta property="og:site_name" content="My Blog">
+  <meta property="og:site_name" content="Sen Yuan (袁森) - Learning to Unlearn">
   <meta property="og:title" content="Introduction to Contrastive Loss">
   <meta property="og:description" content="Contrastive Loss is a widely used objective in metric learning and contrastive learning.
 Its goal is to learn an embedding space where similar samples are close together, while dissimilar samples are far apart.
@@ -95,6 +95,8 @@ penalizes large distances between positive pairs penalizes small distances betwe
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-01-09T00:00:00+00:00">
     <meta property="article:modified_time" content="2026-01-09T00:00:00+00:00">
+    <meta property="article:tag" content="Contrastive Learning">
+    <meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Introduction to Contrastive Loss">
 <meta name="twitter:description" content="Contrastive Loss is a widely used objective in metric learning and contrastive learning.
@@ -140,7 +142,7 @@ This encourages the model to learn representations that are discriminative and g
   "name": "Introduction to Contrastive Loss",
   "description": "Contrastive Loss is a widely used objective in metric learning and contrastive learning.\nIts goal is to learn an embedding space where similar samples are close together, while dissimilar samples are far apart.\nThe loss operates on pairs of samples:\nPositive pairs: two samples that should be considered similar Negative pairs: two samples that should be considered different Given a pair of embeddings and a binary label, contrastive loss:\npenalizes large distances between positive pairs penalizes small distances between negative pairs (up to a margin) This encourages the model to learn representations that are discriminative and geometry-aware.\n",
   "keywords": [
-    
+    "contrastive learning", "ML"
   ],
   "articleBody": "Contrastive Loss is a widely used objective in metric learning and contrastive learning.\nIts goal is to learn an embedding space where similar samples are close together, while dissimilar samples are far apart.\nThe loss operates on pairs of samples:\nPositive pairs: two samples that should be considered similar Negative pairs: two samples that should be considered different Given a pair of embeddings and a binary label, contrastive loss:\npenalizes large distances between positive pairs penalizes small distances between negative pairs (up to a margin) This encourages the model to learn representations that are discriminative and geometry-aware.\nA Common Formulation A typical contrastive loss can be written as:\n[ L = y \\cdot d^2 + (1 - y) \\cdot \\max(0, m - d)^2 ]\nwhere:\n(d) is the distance between two embeddings (y = 1) for a positive pair, (y = 0) for a negative pair (m) is a margin hyperparameter Why It Matters Contrastive Loss is especially useful when:\nexplicit labels are scarce similarity relationships matter more than class boundaries It is commonly used in:\nrepresentation learning retrieval and recommendation systems self-supervised learning (e.g., SimCLR, CLIP) Siamese and dual-encoder models By shaping the embedding space directly, contrastive loss often leads to representations that transfer well to downstream tasks.\n",
   "wordCount" : "209",
@@ -153,7 +155,7 @@ This encourages the model to learn representations that are discriminative and g
   },
   "publisher": {
     "@type": "Organization",
-    "name": "My Blog",
+    "name": "Sen Yuan (袁森) - Learning to Unlearn",
     "logo": {
       "@type": "ImageObject",
       "url": "https://www.yuansen.xyz/favicon.ico"
@@ -166,7 +168,7 @@ This encourages the model to learn representations that are discriminative and g
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://www.yuansen.xyz/" accesskey="h" title="My Blog (Alt + H)">My Blog</a>
+            <a href="https://www.yuansen.xyz/" accesskey="h" title="Sen Yuan (袁森) - Learning to Unlearn (Alt + H)">Sen Yuan (袁森) - Learning to Unlearn</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -192,8 +194,8 @@ This encourages the model to learn representations that are discriminative and g
         </div>
         <ul id="menu">
             <li>
-                <a href="https://www.yuansen.xyz/archives/" title="Archive">
-                    <span>Archive</span>
+                <a href="https://www.yuansen.xyz/posts/" title="Posts">
+                    <span>Posts</span>
                 </a>
             </li>
             <li>
@@ -267,12 +269,14 @@ L = y \cdot d^2 + (1 - y) \cdot \max(0, m - d)^2
 
   <footer class="post-footer">
     <ul class="post-tags">
+      <li><a href="https://www.yuansen.xyz/tags/contrastive-learning/">Contrastive Learning</a></li>
+      <li><a href="https://www.yuansen.xyz/tags/ml/">ML</a></li>
     </ul>
 
 <ul class="share-buttons">
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to Contrastive Loss on x"
-            href="https://x.com/intent/tweet/?text=Introduction%20to%20Contrastive%20Loss&amp;url=https%3a%2f%2fwww.yuansen.xyz%2fposts%2fintroduction-to-contrastive-loss%2f&amp;hashtags=">
+            href="https://x.com/intent/tweet/?text=Introduction%20to%20Contrastive%20Loss&amp;url=https%3a%2f%2fwww.yuansen.xyz%2fposts%2fintroduction-to-contrastive-loss%2f&amp;hashtags=contrastivelearning%2cML">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -341,7 +345,7 @@ L = y \cdot d^2 + (1 - y) \cdot \max(0, m - d)^2
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://www.yuansen.xyz/">My Blog</a></span> · 
+        <span>&copy; 2026 <a href="https://www.yuansen.xyz/">Sen Yuan (袁森) - Learning to Unlearn</a></span> · 
 
     <span>
         Powered by
