@@ -4,7 +4,7 @@ draft: false
 title: 'Introduction to Contrastive Loss'
 ---
 
-## Contrastive Loss
+
 
 Contrastive Loss is a widely used objective in **metric learning** and **contrastive learning**.  
 Its goal is to learn an embedding space where **similar samples are close together**, while **dissimilar samples are far apart**.
