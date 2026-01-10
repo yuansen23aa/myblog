@@ -16,19 +16,23 @@
       <description>&lt;p&gt;好了，我也不知道说点什么 哈哈哈，这是个疯狂的世界&lt;/p&gt;</description>
     </item>
     <item>
-      <title></title>
+      <title>Introduction to Contrastive Loss</title>
       <link>https://www.yuansen.xyz/posts/introduction-to-contrastive-loss/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
       <guid>https://www.yuansen.xyz/posts/introduction-to-contrastive-loss/</guid>
-      <description>&lt;h2 id=&#34;contrastive-loss&#34;&gt;Contrastive Loss&lt;/h2&gt;
-&lt;p&gt;Contrastive Loss is a widely used objective in &lt;strong&gt;metric learning&lt;/strong&gt; and &lt;strong&gt;contrastive learning&lt;/strong&gt;.&lt;br&gt;
+      <description>&lt;p&gt;Contrastive Loss is a widely used objective in &lt;strong&gt;metric learning&lt;/strong&gt; and &lt;strong&gt;contrastive learning&lt;/strong&gt;.&lt;br&gt;
 Its goal is to learn an embedding space where &lt;strong&gt;similar samples are close together&lt;/strong&gt;, while &lt;strong&gt;dissimilar samples are far apart&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The loss operates on &lt;strong&gt;pairs of samples&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Positive pairs&lt;/strong&gt;: two samples that should be considered similar&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Negative pairs&lt;/strong&gt;: two samples that should be considered different&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Given a pair of embeddings and a binary label, contrastive loss:&lt;/p&gt;</description>
+&lt;p&gt;Given a pair of embeddings and a binary label, contrastive loss:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;penalizes &lt;strong&gt;large distances&lt;/strong&gt; between positive pairs&lt;/li&gt;
+&lt;li&gt;penalizes &lt;strong&gt;small distances&lt;/strong&gt; between negative pairs (up to a margin)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This encourages the model to learn representations that are discriminative and geometry-aware.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
