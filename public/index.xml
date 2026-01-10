@@ -13,7 +13,11 @@
       <link>https://www.yuansen.xyz/posts/my-first-post/</link>
       <pubDate>Fri, 09 Jan 2026 14:27:21 -0800</pubDate>
       <guid>https://www.yuansen.xyz/posts/my-first-post/</guid>
-      <description>&lt;p&gt;好了，我也不知道说点什么 哈哈哈，这是个疯狂的世界&lt;/p&gt;</description>
+      <description>&lt;p&gt;好了，我也不知道说点什么 哈哈哈，这是个疯狂的世界&lt;/p&gt;
+&lt;p&gt;Inline: $a^2 + b^2 = c^2$&lt;/p&gt;
+&lt;p&gt;$$
+\mathcal{L} = -\sum_i y_i \log \hat{y}_i
+$$&lt;/p&gt;</description>
     </item>
     <item>
       <title>Introduction to Contrastive Loss</title>
