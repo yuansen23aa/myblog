@@ -2,28 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Sen Yuan (袁森) - Learning to Unlearn</title>
-    <link>https://www.yuansen.xyz/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on Sen Yuan (袁森) - Learning to Unlearn</description>
     <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 09 Jan 2026 14:27:21 -0800</lastBuildDate>
-    <atom:link href="https://www.yuansen.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post lol</title>
-      <link>https://www.yuansen.xyz/posts/my-first-post/</link>
-      <pubDate>Fri, 09 Jan 2026 14:27:21 -0800</pubDate>
-      <guid>https://www.yuansen.xyz/posts/my-first-post/</guid>
-      <description>&lt;p&gt;好了，我也不知道说点什么 哈哈哈，这是个疯狂的世界&lt;/p&gt;
-&lt;p&gt;Inline: $a^2 + b^2 = c^2$&lt;/p&gt;
-&lt;p&gt;$$
-\mathcal{L} = -\sum_i y_i \log \hat{y}_i
-$$&lt;/p&gt;</description>
+      <title>Why I Started Writing</title>
+      <link>http://localhost:1313/posts/my-first-post/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <description>&lt;p&gt;2026 is shaping up to be another exciting year for AI and technology. One of my New Year’s resolutions is to start a personal website to document my learning journey and the “aha” moments I encounter along the way, both in technology and in life. So why writing, and why now?&lt;/p&gt;
+&lt;p&gt;Some might argue that large language models already explain technical concepts so well that writing blog posts no longer adds much value. I see it differently.Here are my reasons.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Introduction to Contrastive Loss</title>
-      <link>https://www.yuansen.xyz/posts/introduction-to-contrastive-loss/</link>
+      <link>http://localhost:1313/posts/introduction-to-contrastive-loss/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://www.yuansen.xyz/posts/introduction-to-contrastive-loss/</guid>
+      <guid>http://localhost:1313/posts/introduction-to-contrastive-loss/</guid>
       <description>&lt;p&gt;Contrastive Loss is a widely used objective in &lt;strong&gt;metric learning&lt;/strong&gt; and &lt;strong&gt;contrastive learning&lt;/strong&gt;.&lt;br&gt;
 Its goal is to learn an embedding space where &lt;strong&gt;similar samples are close together&lt;/strong&gt;, while &lt;strong&gt;dissimilar samples are far apart&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The loss operates on &lt;strong&gt;pairs of samples&lt;/strong&gt;:&lt;/p&gt;
