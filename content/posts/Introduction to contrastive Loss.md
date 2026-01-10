@@ -1,3 +1,9 @@
+---
+date: '2026-01-09'
+draft: false
+title: 'Introduction to Contrastive Loss'
+---
+
 ## Contrastive Loss
 
 Contrastive Loss is a widely used objective in **metric learning** and **contrastive learning**.  
