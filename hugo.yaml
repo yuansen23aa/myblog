@@ -1,5 +1,5 @@
 baseURL: "https://www.yuansen.xyz/"
-title: "My Blog"
+title: "Sen Yuan (袁森) - Learning to Unlearn"
 theme: "PaperMod"
 
 enableRobotsTXT: true
@@ -9,10 +9,10 @@ buildFuture: false
 params:
   # This makes the "Hi, I'm..." section appear
   homeInfoParams:
-    Title: "Hi, this is yuansen23"
+    Title: "Hi, this is Sen, a lifelong learner and explorer."
     Content: >
-      I'm documenting my learning notes in this blog.
-      Welcome to my little corner of the internet.
+      Passionate about AI/ML and other technologies. Join me on my journey as I share learnings and discoveries.
+      Let's explore together!
   
   # Social icons below the intro
   socialIcons:
@@ -28,9 +28,9 @@ params:
   
 menu:
   main:
-    - identifier: archives
-      name: Archive
-      url: /archives/
+    - identifier: posts
+      name: Posts
+      url: /posts/
       weight: 10
     - identifier: search
       name: Search
