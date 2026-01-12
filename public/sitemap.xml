@@ -2,30 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:64253/posts/</loc>
+    <loc>https://www.yuansen.xyz/posts/</loc>
     <lastmod>2026-01-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64253/</loc>
+    <loc>https://www.yuansen.xyz/</loc>
     <lastmod>2026-01-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64253/posts/revisit-transformer/</loc>
+    <loc>https://www.yuansen.xyz/posts/transformer_part1/</loc>
     <lastmod>2026-01-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64253/posts/my-first-post/</loc>
+    <loc>https://www.yuansen.xyz/posts/my-first-post/</loc>
     <lastmod>2026-01-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64253/tags/contrastive-learning/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <loc>https://www.yuansen.xyz/categories/</loc>
   </url><url>
-    <loc>http://localhost:64253/posts/introduction-to-contrastive-loss/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:64253/tags/ml/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:64253/tags/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:64253/categories/</loc>
+    <loc>https://www.yuansen.xyz/tags/</loc>
   </url>
 </urlset>
