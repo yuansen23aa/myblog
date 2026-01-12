@@ -139,7 +139,7 @@ Transformer was first proposed as a encoder-decoder model to solve the machine t
     <h1 class="post-title entry-hint-parent">
       Transformer Part I: the details that actually matter
     </h1>
-    <div class="post-meta"><span title='2026-01-11 00:00:00 +0000 UTC'>January 11, 2026</span>&nbsp;·&nbsp;<span>8 min</span>
+    <div class="post-meta"><span title='2026-01-11 00:00:00 +0000 UTC'>January 11, 2026</span>&nbsp;·&nbsp;<span>10 min</span>
 
 </div>
   </header> 
@@ -166,6 +166,56 @@ Transformer was first proposed as a encoder-decoder model to solve the machine t
 <p><img alt="Transformer attention" loading="lazy" src="/posts/transformer_part1/transformer.png"></p>
 <h1 id="technical-deep-dive">Technical deep dive<a hidden class="anchor" aria-hidden="true" href="#technical-deep-dive">#</a></h1>
 <p>Now we dive into some key technical aspects of transformers to understand the intuition behind them.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Notation</th>
+          <th>Meaning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>d</td>
+          <td>The dimension of token emb &amp; positional emb</td>
+      </tr>
+      <tr>
+          <td>L</td>
+          <td>The length of token sequence</td>
+      </tr>
+      <tr>
+          <td>B</td>
+          <td>Batch size</td>
+      </tr>
+      <tr>
+          <td>H</td>
+          <td>Head size</td>
+      </tr>
+      <tr>
+          <td>V</td>
+          <td>Vocab size</td>
+      </tr>
+      <tr>
+          <td>N</td>
+          <td>Number of Multi-head attention blocks</td>
+      </tr>
+      <tr>
+          <td>x</td>
+          <td>The input for attention block, shape (L, d)</td>
+      </tr>
+      <tr>
+          <td>$W^q, W^k, W^v$</td>
+          <td>projection matrix to project input x to q, k, v, shape (d, d/H)</td>
+      </tr>
+      <tr>
+          <td>q, k, v</td>
+          <td>vector representation for token level attention, shape (d/H,1)</td>
+      </tr>
+      <tr>
+          <td>Q, K, V</td>
+          <td>matrix representation for all tokens in sequnece for attention, shape (L, d/H), e.g., $Q = [q_1^T,&hellip;,q_L^T]^T$</td>
+      </tr>
+  </tbody>
+</table>
 <h2 id="self-attention">Self Attention<a hidden class="anchor" aria-hidden="true" href="#self-attention">#</a></h2>
 <p>I remember the first time i read the &ldquo;Attention is all you need&rdquo; paper years back, i was really puzzled about what Q,K,V really means. It is easier if we first start pondering what&rsquo;s needed in the output. So, the input now is embedding vectors for each individual tokens plus some positional embeddings, which is still token-wise information without communicating with each other. What&rsquo;s really desired is to let token to communicate and transform itself in such a way that more relevant tokens will play a bigger role in the final output. Mathematically, we need to consider current_token_emb_output = sum over all tokens { similarity(current_token, token) * token }. So the target we are transformation is our Query, the token for which is used for similarity calculation is Key, and the token value that&rsquo;s being averaged over is Value. The naming makes a lot of sense because Query is trying to search for keys that are most relevant and the corresponding values are convolutionized by the affinity between query and key.</p>
 <p>At the individual token level, $ output = \sum_{i=1}^L sim(q, k_i) v_i $ where $L$ is the length of the sequence and $q, k_i, v_i$ are $d$ dimensional vectors. A natural way to calculate sim is dot product $ q^T k_i = \sum_{j=1}^d q_{j} k_{ji}$, assuming each element of $q$ and $k$ are mutually i.i.d Normal(0,1), the variance of the dot product is $d$, to make the dot product standardized normal, we need to rescale it therefore $sim = q^Tk_i/\sqrt{d}$. However, the $sim$ function is only standardized across $d$ token embedding entries, not really normalized across $L$ tokens, namely, we need to rescale $sim(q, k_i)$ such that $\sum_{i=1}^L sim(q, k_i) = 1$. The rescaling is important to bound the variance the final output. A typical way to standardize $sim$ is to use softmax, which is differentiable compared to absolute values. Now, let&rsquo;s switch to matrix notation for compactness, $Q = [q_1^T, &hellip;, q_L^T]^T$, similar for $K, V$. The final output $(L, d)$ matrix is
@@ -174,13 +224,70 @@ $output = Softmax(QK^T/\sqrt{d})V$.</p>
 <h2 id="masking">Masking<a hidden class="anchor" aria-hidden="true" href="#masking">#</a></h2>
 <p>Let&rsquo;s say if the sentence &ldquo;The biggest animal on earth is the blue whale, with a heart the size of a small car&rdquo; is in our training data, now if someone ask transformer &ldquo;the biggest animal on earth is&rdquo;, we need to sample from the tokens and aim to ensure $P(the \quad blue \quad whale| the \quad biggest \quad animal \quad on \quad earth \quad is)$ has an extremely high probablity. So you see, the setenece after &ldquo;the blue whale&rdquo; like &ldquo;with a heart&hellip;&rdquo; does not really matter during token generation. Therefore, if our goal is to generate token with maximum likelihood given preceding tokens in the sentence, we have to ensure the current token only pay attention to earlier tokens. This requires revising the attention calculation.</p>
 <p>Let&rsquo;s say our query $q_t$ is at postion $t$ in the sequence, then $q_t = \sum_{i=1}^t sim(q_t, k_i) v_i$ not sum over all L tokens. The matrix form is shown in the picture above with the lower triangular matrix form.</p>
-<p>To make sure the masking is consistent, we also need to shift the input by 1 position, say if the target sentence is Target = &ldquo;The biggest animal on earth is the blue whale&rdquo;, Input =  &ldquo;&lt;\START&gt; The biggest animal on earth is the blue&rdquo; if our token is just word. The reason for doing so is because the first token &ldquo;The&rdquo; cannot pay attention to itself so we need to create a special token &lt;\START&gt; to act as its preceding token. This is logical because generating &ldquo;The&rdquo; is based on empty context.</p>
+<p>To make sure the the model generation and target are aligned, we also need to shift the input by 1 position, say if the target sentence is Target = &ldquo;The biggest animal on earth is the blue whale&rdquo;, Input =  &ldquo;&lt;\START&gt; The biggest animal on earth is the blue&rdquo; if our token is just word. Without this, we would expect the output from &ldquo;the&rdquo; is &ldquo;biggest&rdquo;, but target is still &ldquo;the&rdquo; which will lead to unexpected loss.</p>
 <h2 id="add--norm">Add &amp; Norm<a hidden class="anchor" aria-hidden="true" href="#add--norm">#</a></h2>
 <p>The Add &amp; Norm refers to residual connection and layer norm. Let&rsquo;s first look at the residual connection: $x + f(x)$, the idea is simple, for the transformation, the output is not $f(x)$, instead its $y = x + f(x)$. This equivalently is using $f(x) = y - x$ to learn the residual between output and input. The residual connection is applied to both attention head and FFN. Why this is important ? Let&rsquo;s consider a deep neural networks $y = f_1 (f_2 ..,(f_M (x,w)))$, then $\frac{dy}{dw} = \partial f_1 * {&hellip;}  *\partial f_{M}$, and if lots of the partial derivatives are between 0 and 1, the gradient of w will vanish as a result, the deeper the network, the more likely it will happen. Now if we switch to residual connection $y = f_1 (. + f_2(&hellip;, x + f_M(x, w)))$,
 $\frac{dy}{dw} = (1 + \partial f_1) * {&hellip;}  * (1+\partial f_{M})$ which won&rsquo;t suffer from gradient vanishing thanks to adding the input back to the transformation.</p>
 <p>For the layer norm, besides generally stablizing the network and reducing the training time. One important reason why it&rsquo;s so crucial for transformation is because it forces the normalization chain is consistently maintained, as aformentioned we apply $1/\sqrt{d}$ scaling factor to dot product to standardize variance, which is based on the <em><strong>ASSUMPTION</strong></em> that each entry in $q$ and $k$ vector are normalized to standard normal distribution. The make the asusmption hold, we need to apply layer norm to first standardize the embedding vector for each token in the sequence so that $x = (x_1, &hellip;, x_L)$ matrix where $x_i$ is d dimensional, $x_{ij} = \frac{x_{ij} - mean(x_i)}{std(x_i)}$, here we ignored the tunable parameters in layernorm for illustration purpose. Then $q, k , v = x W^q, x W^k, x W^v $ are standardized as a result.</p>
+<p><img alt="Normalization Flow" loading="lazy" src="/posts/transformer_part1/norm.png"></p>
 <h2 id="model-complexity">Model Complexity<a hidden class="anchor" aria-hidden="true" href="#model-complexity">#</a></h2>
+<p>Let&rsquo;s go over the parameter size and algorithm complexity for transformer.
+We consider a single sequence in the batch for the estimation.</p>
+<p>The estimation should be straightforward. For attention blocks, we have three major steps. For convenience, we ignore multi-head setting and use d as the dimension for both input token emb size and projection matrix output dim.</p>
+<p>Step 1. Projection:  For projection from input x to Q, K, V, the flop is also $O(L d^2)$. The projection result is $(L,d)$ and each entry is generated by dot product of $d$ dimensional vector.</p>
+<p>Step 2. Attention score: The $L^2 d$ is for  attention mechanism because the output is $L \times L$ and each output entry requires a  $d$ dimensional dot product compututation, which leads to $L^2d$.</p>
+<p>Step 3. For FFN, the output is $L \times d$
+dimensional and each entry is the result from a $d$ dimensional dot product, which leads to $Ld^2$.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Component</th>
+          <th>Parameter Size</th>
+          <th>Complexity/FLOP</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Token emb Lookup</td>
+          <td>$V \times d $</td>
+          <td>$O(L)$</td>
+      </tr>
+      <tr>
+          <td>Positional emb lookup</td>
+          <td>$L \times d$</td>
+          <td>$O(L)$</td>
+      </tr>
+      <tr>
+          <td>Layernorm</td>
+          <td>$2d$</td>
+          <td>$O(Ld)$</td>
+      </tr>
+      <tr>
+          <td>Multi-head attention blocks</td>
+          <td>$const \times d^2 \times N$</td>
+          <td>$O(L^2 d + L d^2)$</td>
+      </tr>
+      <tr>
+          <td>LM head</td>
+          <td>$Vd$</td>
+          <td>$ O(VdL)$</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="practical-implications">Practical Implications<a hidden class="anchor" aria-hidden="true" href="#practical-implications">#</a></h3>
+<p>Large vocabulary size (V), long context window (L), deeper networks ((N)), and larger model dimension (d) all increase model cost, but in different ways:</p>
+<ul>
+<li>(L) primarily affects <strong>FLOPs and memory</strong></li>
+<li>(d) and (N) primarily affect <strong>parameter count</strong></li>
+</ul>
+<p>This explains why models such as <strong>GPT-3</strong> scale mainly through large (d) and (N), while avoiding absolute positional embeddings for long-context settings.</p>
 <h2 id="optimization-opportunities">Optimization opportunities<a hidden class="anchor" aria-hidden="true" href="#optimization-opportunities">#</a></h2>
+<ul>
+<li>Episode 2 efficiet Attention: kv cache, flash, paged attention</li>
+<li>Episode 3 stability and representation: rope, pre-LN and modern activation</li>
+<li>Episode 4 scaling width, dpeth and MoE.</li>
+<li>Episode</li>
+</ul>
 <h1 id="implementation--experments">Implementation &amp; Experments<a hidden class="anchor" aria-hidden="true" href="#implementation--experments">#</a></h1>
 
 
