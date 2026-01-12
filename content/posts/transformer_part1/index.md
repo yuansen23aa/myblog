@@ -30,6 +30,34 @@ In addition to the above components, the transformer also implemented add & norm
 
 ![Transformer attention](transformer.png)
 
+# Technical deep dive
+
+Now we dive into some key technical aspects of transformers to understand the intuition behind them.
+
+## Masked Self Attention 
+
+I remember the first time i read the "Attention is all you need" paper years back, i was really puzzled about what Q,K,V really means. It is easier if we first start pondering what's needed in the output. So, the input now is embedding vectors for each individual tokens plus some positional embeddings, which is still token-wise information without communicating with each other. What's really desired is to let token to communicate and transform itself in such a way that more relevant tokens will play a bigger role in the final output. Mathematically, we need to consider current_token_emb_output = sum over all tokens { similarity(current_token, token) * token }. So the target we are transformation is our Query, the token for which is used for similarity calculation is Key, and the token value that's being averaged over is Value. The naming makes a lot of sense because Query is trying to search for keys that are most relevant and the corresponding values are convolutionized by the affinity between query and key. 
+
+At the individual token level, $ output = \sum_i^L sim(q, k_i) v_i $ where $L$ is the length of the sequence. 
+
+
+## Add & Norm
+
+
+## Model Complexity 
+
+
+## Optimization opportunities
+
+
+
+
+# Implementation & Experments
+
+
+
+
+
 
 
 
