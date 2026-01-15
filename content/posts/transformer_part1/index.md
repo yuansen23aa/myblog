@@ -1,7 +1,7 @@
 ---
 date: '2026-01-11'
 draft: false
-title: 'Transformer Part I: the details that actually matter'
+title: 'Transformer Part I: The algorithmic details that actually matter'
 ---
 
 Transformer is arguably the most influential AI innovation in the past decade, serving as the foundation as our modern day LLM models. It also revolutionize some adjacent fields such as computer vision, recommender system etc. In this note, we are going to revisit this revolutionary technology with a focus on discussing a set of details that matter. 
