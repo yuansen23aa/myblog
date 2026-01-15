@@ -72,7 +72,10 @@ To make sure the the model generation and target are aligned, we also need to sh
 The Add & Norm refers to residual connection and layer norm. Let's first look at the residual connection: $x + f(x)$, the idea is simple, for the transformation, the output is not $f(x)$, instead its $y = x + f(x)$. This equivalently is using $f(x) = y - x$ to learn the residual between output and input. The residual connection is applied to both attention head and FFN. Why this is important ? Let's consider a deep neural networks $y = f_1 (f_2 ..,(f_M (x,w)))$, then $\frac{dy}{dw} = \partial f_1 * {...}  *\partial f_{M}$, and if lots of the partial derivatives are between 0 and 1, the gradient of w will vanish as a result, the deeper the network, the more likely it will happen. Now if we switch to residual connection $y = f_1 (. + f_2(..., x + f_M(x, w)))$, 
 $\frac{dy}{dw} = (1 + \partial f_1) * {...}  * (1+\partial f_{M})$ which won't suffer from gradient vanishing thanks to adding the input back to the transformation. 
 
-For the layer norm, besides generally stablizing the network and reducing the training time. One important reason why it's so crucial for transformation is because it forces the normalization chain is consistently maintained, as aformentioned we apply $1/\sqrt{d}$ scaling factor to dot product to standardize variance, which is based on the ***ASSUMPTION*** that each entry in $q$ and $k$ vector are normalized to standard normal distribution. The make the asusmption hold, we need to apply layer norm to first standardize the embedding vector for each token in the sequence so that $x = (x_1, ..., x_L)$ matrix where $x_i$ is d dimensional, $x_{ij} = \frac{x_{ij} - mean(x_i)}{std(x_i)}$, here we ignored the tunable parameters in layernorm for illustration purpose. Then $q, k , v = x W^q, x W^k, x W^v $ are standardized as a result.    
+For the layer norm, besides generally stablizing the network and reducing the training time. One important reason why it's so crucial for transformation is because it forces the normalization chain is consistently maintained, as aformentioned we apply $1/\sqrt{d}$ scaling factor to dot product to standardize variance, which is based on the ***ASSUMPTION*** that each entry in $q$ and $k$ vector are normalized to standard normal distribution. The make the asusmption hold, we need to apply layer norm to first standardize the embedding vector for each token in the sequence so that $x = (x_1, ..., x_L)$ matrix where $x_i$ is d dimensional, $x_{ij} = \frac{x_{ij} - mean(x_i)}{std(x_i)}$, here we ignored the tunable parameters in layernorm for illustration purpose. Then $q, k , v = x W^q, x W^k, x W^v $ are standardized as a result.   
+
+Actually, there's one more normalization needs to be implemented, in a more implicit way. Remember, inside the attention block,
+we have two residual connection steps: y = x + MHA(x); then z = y + FFN(y); which will cause variance inflation as we increase number of blocks/layers. Therefore it's desirable to rescale $z = \frac{z}{\sqrt{2N}}$ in the weight initialization for residual branch.
 
 ![Normalization Flow](norm.png)
 ## Model Complexity 
@@ -109,16 +112,21 @@ This explains why models such as **GPT-3** scale mainly through large \(d\) and 
 
 
 
-## Optimization opportunities
+# Closing Thoughts & Next Episode
 
-- Episode 2 efficiet Attention: kv cache, flash, paged attention
-- Episode 3 stability and representation: rope, pre-LN and modern activation
-- Episode 4 scaling width, dpeth and MoE. 
-- Episode
+In this note, we go through the algorithmic details of the decoder-only transformer, aka, causal transformer.
+The heart of the transformer is the attention block where two sub components are stacked: masked self attention and feed forward network. The attention's job is communication and convolution, transforming each token's embedding into contexualized token embedding. The feed forward network is processing information at token level, reorganizing data coming from different attention heads (concatenated output) into a better representation of the token. 
+
+I personally view self attention as a mathematically projection, if we ignore the softmax normalization and parameterization of k and v, $output = \sum_{i=1}^T <q, x_i> x_i $ is basically projection of q onto the subsapce spanned by $(x_1, ... ,x_n)$, which seems really plausible. In simple language, what attention is doing is to find the best combination of seen words embeddings to re-represent the query embedding.
+
+In the next episode, we will dig into the implementation details and some fun toy experiments to gain deeper insights about this beast. 
 
 
 
-# Implementation & Experments
+
+
+
+
 
 
 
