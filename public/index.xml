@@ -2,34 +2,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sen Yuan (袁森) - Learning to Unlearn</title>
-    <link>http://localhost:1313/</link>
+    <link>https://www.yuansen.xyz/</link>
     <description>Recent content on Sen Yuan (袁森) - Learning to Unlearn</description>
     <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
     <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.yuansen.xyz/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Transformer Part II: The implementation &amp; fun experiments</title>
-      <link>http://localhost:1313/posts/transformer_part2/</link>
+      <title>Transformer Part II: The implementation &amp; experiments</title>
+      <link>https://www.yuansen.xyz/posts/transformer_part2/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/transformer_part2/</guid>
+      <guid>https://www.yuansen.xyz/posts/transformer_part2/</guid>
       <description>&lt;p&gt;In this episode, we will go into some details of the causal transfomer implementation. Some toy experiment results are shown to analyze transformer, in an attempt to understand what drives the performance. We will not go through every single line of implementation. The code used for illustration can be found: &lt;a href=&#34;https://github.com/yuansen23aa/GPT-learning/blob/main/basic_gpt.ipynb&#34;&gt;https://github.com/yuansen23aa/GPT-learning/blob/main/basic_gpt.ipynb&lt;/a&gt;, which largely follows Anrej Karpathy&amp;rsquo;s nanoGPT implementation with some modifications. So Let&amp;rsquo;s dig in.&lt;/p&gt;
 &lt;p&gt;We use those terms interchangeably: block size = sequence length, causal attention = masked attention, causal transformation = decoder-only transformer.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Transformer Part I: The algorithmic details that actually matter</title>
-      <link>http://localhost:1313/posts/transformer_part1/</link>
+      <link>https://www.yuansen.xyz/posts/transformer_part1/</link>
       <pubDate>Sun, 11 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/transformer_part1/</guid>
+      <guid>https://www.yuansen.xyz/posts/transformer_part1/</guid>
       <description>&lt;p&gt;Transformer is arguably the most influential AI innovation in the past decade, serving as the foundation as our modern day LLM models. It also revolutionize some adjacent fields such as computer vision, recommender system etc. In this note, we are going to revisit this revolutionary technology with a focus on discussing a set of details that matter.&lt;/p&gt;
 &lt;h1 id=&#34;transformer-recap&#34;&gt;Transformer Recap&lt;/h1&gt;
 &lt;p&gt;Transformer was first proposed as a encoder-decoder model to solve the machine translation problem. Take English to Chinese language translation as our example, encoder is basically encoding text tokens in a way such that both individual token meaning and joint dependency can be captured. The output is the tensor representation of English sentences. The decoder is responsible for text generation and learning relationship between English and Chines. The text generation process is basically next token prediction which is achieved by masking unseen tokens so attention is only paid to preceding tokens in the sentence, namely causal masking. The English and Chineses relationship is learned by cross attention where query is Chinese tokens, which pays more attention to tokens from encoded English output with high attention weights.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Why I Started Writing</title>
-      <link>http://localhost:1313/posts/my-first-post/</link>
+      <link>https://www.yuansen.xyz/posts/my-first-post/</link>
       <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <guid>https://www.yuansen.xyz/posts/my-first-post/</guid>
       <description>&lt;p&gt;2026 is shaping up to be another exciting year for AI and technology. One of my New Year’s resolutions is to start a personal website to document my learning journey and the “aha” moments I encounter along the way, both in technology and in life. So why writing, and why now?&lt;/p&gt;
 &lt;p&gt;Some might argue that large language models already explain technical concepts so well that writing blog posts no longer adds much value. I see it differently.Here are my reasons.&lt;/p&gt;</description>
     </item>
