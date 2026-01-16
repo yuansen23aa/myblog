@@ -143,7 +143,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Transformer Part I: the details that actually matter
+    <h2 class="entry-hint-parent">Transformer Part II: The implementation &amp; fun experiments
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In this episode, we will go into some details of the causal transfomer implementation. Some toy experiment results are shown to analyze transformer, in an attempt to understand what drives the performance. We will not go through every single line of implementation. The code used for illustration can be found: https://github.com/yuansen23aa/GPT-learning/blob/main/basic_gpt.ipynb, which largely follows Anrej Karpathy’s nanoGPT implementation with some modifications.
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-15 00:00:00 +0000 UTC'>January 15, 2026</span>&nbsp;·&nbsp;<span>1 min</span></footer>
+  <a class="entry-link" aria-label="post link to Transformer Part II: The implementation & fun experiments" href="http://localhost:1313/posts/transformer_part2/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Transformer Part I: The algorithmic details that actually matter
     </h2>
   </header>
   <div class="entry-content">
@@ -151,8 +164,8 @@
 Transformer Recap Transformer was first proposed as a encoder-decoder model to solve the machine translation problem. Take English to Chinese language translation as our example, encoder is basically encoding text tokens in a way such that both individual token meaning and joint dependency can be captured. The output is the tensor representation of English sentences. The decoder is responsible for text generation and learning relationship between English and Chines. The text generation process is basically next token prediction which is achieved by masking unseen tokens so attention is only paid to preceding tokens in the sentence, namely causal masking. The English and Chineses relationship is learned by cross attention where query is Chinese tokens, which pays more attention to tokens from encoded English output with high attention weights.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2026-01-11 00:00:00 +0000 UTC'>January 11, 2026</span>&nbsp;·&nbsp;<span>10 min</span></footer>
-  <a class="entry-link" aria-label="post link to Transformer Part I: the details that actually matter" href="http://localhost:1313/posts/transformer_part1/"></a>
+  <footer class="entry-footer"><span title='2026-01-11 00:00:00 +0000 UTC'>January 11, 2026</span>&nbsp;·&nbsp;<span>11 min</span></footer>
+  <a class="entry-link" aria-label="post link to Transformer Part I: The algorithmic details that actually matter" href="http://localhost:1313/posts/transformer_part1/"></a>
 </article>
 
 <article class="post-entry"> 
